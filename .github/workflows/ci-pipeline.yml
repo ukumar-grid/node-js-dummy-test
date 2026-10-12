@@ -6,8 +6,36 @@ on:
   workflow_dispatch:
 
 jobs:
+
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Print Hello
         run: 'echo "Hello CI Pipeline"'
+
+  checkout:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Print commit SHA
+        run: 'echo "Commit SHA: ${{ github.sha}}"'
+
+  code-quality:
+    name: Code Quality Check
+    runs-on: ubuntu-latest
+    needs: checkout
+    steps:
+        - name: run code quality check
+          run: 'echo "Running code quality check..."'
+
+  testing:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    needs: code-quality
+    steps:
+        - name: run tests
+          run: 'echo "Running tests..."'
+
+      
+    
