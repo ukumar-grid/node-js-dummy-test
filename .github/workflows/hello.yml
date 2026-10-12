@@ -1,0 +1,19 @@
+name : Hello Workflow
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    
+jobs:
+  hello_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Hello
+        run: echo "HELLO WORLD"
+
+      - name: Print commit SHA
+        run: echo 'Commit SHA: ${{ github.sha }}'
+
+      - name: Print branch name
+        run: echo 'Branch Name: ${{ github.ref_name }}'
